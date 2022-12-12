@@ -13,14 +13,11 @@ import {
     signInWithEmailAndPassword,
 } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
-import { firebaseConfig } from './src/api/firebase-config';
+import { firebaseConfig } from '../api/firebase-config';
 
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { useNavigation } from '@react-navigation/native';
 
-const Stack = createNativeStackNavigator();
-
-function LoginScreen() {
+export default function LoginScreen() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigation = useNavigation();
@@ -50,7 +47,7 @@ function LoginScreen() {
             });
     };
     return (
-        <View style={styles.container}>
+        <View>
             <View>
                 <Text>Email</Text>
                 <TextInput
@@ -74,23 +71,3 @@ function LoginScreen() {
         </View>
     );
 }
-
-export default function App() {
-    return (
-        <NavigationContainer>
-            <Stack.Navigator initialRouteName="Login">
-                <Stack.Screen name="Login" component={LoginScreen} />
-                <Stack.Screen name="Home" component={HomeScreen} />
-            </Stack.Navigator>
-        </NavigationContainer>
-    );
-}
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-});
