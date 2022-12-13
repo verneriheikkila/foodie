@@ -1,6 +1,8 @@
 export const firebaseConfig = {
     apiKey: 'AIzaSyBkLD82OIsLnOC3AiKWXUT0ySmSFNAm5Wg',
     authDomain: 'foodie-87edf.firebaseapp.com',
+    databaseURL:
+        'https://foodie-87edf-default-rtdb.europe-west1.firebasedatabase.app',
     projectId: 'foodie-87edf',
     storageBucket: 'foodie-87edf.appspot.com',
     messagingSenderId: '43480679539',

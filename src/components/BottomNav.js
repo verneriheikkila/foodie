@@ -2,7 +2,16 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import React from 'react';
 import { Feather } from '@expo/vector-icons';
+
 import { useNavigation } from '@react-navigation/native';
+// import {
+//     StackActions,
+//     NavigationActions,
+// } from '@react-navigation/native-stack';
+
+import { initializeApp } from 'firebase/app';
+import { getAuth, signOut } from 'firebase/auth';
+import { firebaseConfig } from '../api/firebase-config';
 
 const Icon = ({ icon, label }) => (
     <View style={styles.iconContainer}>
@@ -13,16 +22,30 @@ const Icon = ({ icon, label }) => (
 
 const BottomNav = () => {
     const navigation = useNavigation();
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    // const resetAction = StackActions.reset({
+    //     index: 0,
+    //     actions: [NavigationActions.navigate({ routeName: 'Profile' })],
+    // });
+    // this.props.navigation.dispatch(resetAction);
+
+    const signAndLog = () => {
+        signOut(auth);
+        navigation.navigate('Login');
+    };
+
     return (
         <View style={styles.container}>
             <TouchableOpacity onPress={() => navigation.navigate('Map')}>
-                <Icon icon={'map'} label="map" />
+                <Icon icon={'map'} label="kartta" />
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate('Search')}>
-                <Icon icon={'search'} label="search" />
+            <TouchableOpacity onPress={() => navigation.navigate('Search')}>
+                <Icon icon={'search'} label="haku" />
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate('Map')}>
-                <Icon icon={'user'} label="profile" />
+            <TouchableOpacity onPress={signAndLog}>
+                <Icon icon={'log-out'} label="ulos" />
             </TouchableOpacity>
         </View>
     );

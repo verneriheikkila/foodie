@@ -2,32 +2,16 @@
 import { StyleSheet, Text, View, FlatList, Image } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import yelp from '../api/yelp';
+import ToggleFavorite from '../components/ToggleFavourite';
 
-const ShowSelectedScreen = ({ route, navigation }) => {
-    // const { id, otherParam } = route.params;
+const ShowSelectedScreen = ({ route }) => {
     const [result, setResult] = useState(null);
-    // const [isFav, onFav] = useState(false);
-    // const { fav } = useUserLocation(navigation);
 
     useEffect(() => {
         getResult(id);
-        // if (fav && fav.includes(id)) {
-        //     onFav(true);
-        // }
-        // }, [fav]);
     }, []);
 
-    // const selectedFav = () => {
-    //     const { uid } = Firebase.currentUser();
-    //     if (isFav) {
-    //         Firebse.removeFav(uid), id;
-    //     } else {
-    //         Firebase.addFav(uid), id;
-    //     }
-    //     onFav(!isFav);
-    // };
-
-    const { id, otherParam } = route.params;
+    const id = route.params;
 
     const getResult = async (id) => {
         const response = await yelp.get(`/${id}`);
@@ -49,6 +33,7 @@ const ShowSelectedScreen = ({ route, navigation }) => {
                     );
                 }}
             />
+            <ToggleFavorite id={id} />
         </View>
     );
 };

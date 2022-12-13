@@ -7,7 +7,7 @@ import { Alert } from 'react-native';
 export default () => {
     const [results, setResults] = useState([]);
     const [errMessage, setErrMessage] = useState('');
-    const [locationa, setLocationa] = useState({});
+    const [location, setLocation] = useState(null);
 
     useEffect(() => {
         searchApi('');
@@ -19,8 +19,12 @@ export default () => {
             Alert.alert('No permission to get location');
             return;
         }
-        let location = await Location.getCurrentPositionAsync({});
-        setLocationa(location);
+
+        let location = await Location.getCurrentPositionAsync({
+            accuracy: Location.Accuracy.Highest,
+            maximumAge: 10000,
+        });
+        setLocation(location);
 
         try {
             const response = await yelp.get('/search', {
@@ -38,5 +42,5 @@ export default () => {
             setErrMessage('Jotain meni vikaan!');
         }
     };
-    return [searchApi, results, errMessage, locationa];
+    return [searchApi, results, errMessage, location];
 };
