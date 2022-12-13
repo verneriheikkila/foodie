@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import SearchBar from '../components/SearchBar';
 import useResults from '../hooks/useResults';
 import ResultsList from '../components/ResultsList';
+import BottomNav from '../components/BottomNav';
 
 const SearchScreen = () => {
     const [term, setTerm] = useState('');
@@ -14,7 +15,6 @@ const SearchScreen = () => {
             return result.price === price;
         });
     };
-
     return (
         <View style={styles.main}>
             <SearchBar
@@ -41,6 +41,7 @@ const SearchScreen = () => {
                     results={filterResultsByPrice('€€€€')}
                 />
             </ScrollView>
+            <BottomNav />
         </View>
     );
 };

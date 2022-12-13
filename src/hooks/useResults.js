@@ -7,6 +7,7 @@ import { Alert } from 'react-native';
 export default () => {
     const [results, setResults] = useState([]);
     const [errMessage, setErrMessage] = useState('');
+    const [locationa, setLocationa] = useState({});
 
     useEffect(() => {
         searchApi('');
@@ -19,6 +20,7 @@ export default () => {
             return;
         }
         let location = await Location.getCurrentPositionAsync({});
+        setLocationa(location);
 
         try {
             const response = await yelp.get('/search', {
@@ -36,5 +38,5 @@ export default () => {
             setErrMessage('Jotain meni vikaan!');
         }
     };
-    return [searchApi, results, errMessage];
+    return [searchApi, results, errMessage, locationa];
 };

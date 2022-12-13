@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import React from 'react';
 import ResultsDetail from './ResultsDetail';
-import { withNavigation } from 'react-navigation';
+import { withNavigation } from '../hooks/withNavigation';
 
 const ResultsList = ({ title, results, navigation }) => {
     if (!results.length) {
@@ -26,8 +26,9 @@ const ResultsList = ({ title, results, navigation }) => {
                     return (
                         <TouchableOpacity
                             onPress={() =>
-                                navigation.navigate('ShowSelected', {
+                                navigation.navigate('Selected', {
                                     id: item.id,
+                                    otherParam: 'asd',
                                 })
                             }
                         >
